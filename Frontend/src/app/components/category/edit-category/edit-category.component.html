@@ -1,0 +1,40 @@
+<div class="container my-5">
+  <h1 class="mb-3">Edit Category</h1>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="categoryReactiveForm" (ngSubmit)="updateCategory()">
+        <div class="mb-3">
+          <label for="categoryId" class="form-label">Category ID</label>
+          <input type="number" readonly class="form-control" id="categoryId" [value]="categoryDetails.categoryId" />
+        </div>
+        <div class="mb-3">
+          <label for="categoryName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="categoryName" formControlName="categoryName" [ngClass]="{
+            'is-invalid':
+            categoryReactiveForm.controls['categoryName'].invalid &&
+              (categoryReactiveForm.controls['categoryName'].dirty ||
+              categoryReactiveForm.controls['categoryName'].touched)
+          }"
+        />
+          <div
+            class="invalid-feedback"
+            *ngIf="categoryReactiveForm.get('categoryName').invalid && (categoryReactiveForm.get('categoryName').dirty || categoryReactiveForm.get('categoryName').touched)"
+          >
+          <div *ngIf="categoryReactiveForm.controls['categoryName']?.errors?.['required']">
+            Category Name is required.
+          </div>
+          <div *ngIf="categoryReactiveForm.controls['categoryName']?.errors?.['pattern']">
+            Invalid characters
+          </div>
+          <div *ngIf="categoryReactiveForm.controls['categoryName']?.errors?.['minlength']">
+            Should be of more than 2 characters
+          </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!categoryReactiveForm.valid">Update</button>
+        <button type="button" class="btn btn-danger" (click)="deleteCategory(categoryDetails.categoryId)">Delete</button>
+
+      </form>
+    </div>
+  </div>
+</div>

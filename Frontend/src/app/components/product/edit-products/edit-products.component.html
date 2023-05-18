@@ -1,0 +1,99 @@
+<div class="container my-5">
+  <h1 class="mb-3">Edit Product</h1>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="productReactiveForm" (ngSubmit)="updateProduct()">
+        <div class="mb-3">
+          <label for="productId" class="form-label">Product ID</label>
+          <input type="number" readonly class="form-control" id="productId" [value]="productDetails.productId" />
+        </div>
+        <div class="mb-3">
+          <label for="categoryId" class="form-label">Category</label>
+          <select class="form-select" id="categoryId" formControlName="categoryId">
+            <option [ngValue]="null">-- Select Category --</option>
+            <option *ngFor="let category of categories" [value]="category.categoryId">
+              {{ category.categoryName }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="productReactiveForm.get('categoryId').invalid && (productReactiveForm.get('categoryId').dirty || productReactiveForm.get('categoryId').touched)"
+        >
+          <div *ngIf="productReactiveForm.get('categoryId').errors?.['required']">
+            Product Category is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="productName" class="form-label">Product Name</label>
+          <input type="text" class="form-control" id="productName" formControlName="productName" [ngClass]="{
+            'is-invalid':
+            productReactiveForm.controls['productName'].invalid &&
+            (productReactiveForm.controls['productName'].dirty ||
+            productReactiveForm.controls['productName'].touched)
+          }"
+        />
+          <div
+            class="invalid-feedback"
+            *ngIf="productReactiveForm.get('productName').invalid && (productReactiveForm.get('productName').dirty || productReactiveForm.get('productName').touched)"
+          >
+          <div *ngIf="productReactiveForm.controls['productName']?.errors?.['required']">
+            Product Name is required.
+          </div>
+          <div *ngIf="productReactiveForm.controls['productName']?.errors?.['minlength']">
+            Should have more than 2 characters.
+          </div>
+          <div *ngIf="productReactiveForm.controls['productName']?.errors?.['maxlength']">
+            Should have less than 30 characters.
+          </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" class="form-control" id="price" formControlName="price" [ngClass]="{
+            'is-invalid':
+            productReactiveForm.controls['price'].invalid &&
+            (productReactiveForm.controls['price'].dirty ||
+            productReactiveForm.controls['price'].touched)
+          }"
+        />
+          <div
+            class="invalid-feedback"
+            *ngIf="productReactiveForm.get('price').invalid && (productReactiveForm.get('price').dirty || productReactiveForm.get('price').touched)"
+          >
+          <div *ngIf="productReactiveForm.controls['price']?.errors?.['required']">
+            Price is required.
+           </div>
+           <div *ngIf="productReactiveForm.controls['price']?.errors?.['min']">
+             Cannot be negative
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="remainingQuantity" class="form-label">Remaining Quantity</label>
+          <input type="number" class="form-control" id="remainingQuantity" formControlName="remainingQuantity" [ngClass]="{
+            'is-invalid':
+            productReactiveForm.controls['remainingQuantity'].invalid &&
+            (productReactiveForm.controls['remainingQuantity'].dirty ||
+            productReactiveForm.controls['remainingQuantity'].touched)
+          }"
+        />
+          <div
+            class="invalid-feedback"
+            *ngIf="productReactiveForm.get('remainingQuantity').invalid && (productReactiveForm.get('remainingQuantity').dirty || productReactiveForm.get('remainingQuantity').touched)"
+          >
+          <div *ngIf="productReactiveForm.controls['remainingQuantity']?.errors?.['required']">
+            Remaining Quantity is required.
+           </div>
+           <div *ngIf="productReactiveForm.controls['remainingQuantity']?.errors?.['min']">
+            Remaining Quantity cannot be negative
+           </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-danger" (click)="deleteProduct(productDetails.productId)">Delete</button>
+
+      </form>
+    </div>
+  </div>
+</div>

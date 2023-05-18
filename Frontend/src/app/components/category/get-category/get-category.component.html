@@ -1,0 +1,24 @@
+<div class="container my-5 center">
+  <h1 class="mb-3">Category List</h1>
+  <a [routerLink]="['/add/category']" class="button-3"><i class="bi bi-plus-circle"></i> Add Category</a>
+  <br><br>
+
+  <table class="table" *ngIf = "categories && categories.length > 0">
+    <thead class="header">
+      <tr>
+        <th>Category ID</th>
+        <th>Category Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories; index as i" [ngClass]="{ 'table-row-even': i % 2 === 0, 'table-row-odd': i % 2 !== 0 }">
+        <td>{{ category.categoryId }}</td>
+        <td>{{ category.categoryName }}</td>
+        <td><a [routerLink]="['/edit/categories', category.categoryId]"><i class="bi bi-pencil-square"></i> Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!categories || categories.length <=0">No Category has been recorded!</p>
+</div>
+

@@ -1,0 +1,88 @@
+<div class="container my-5">
+  <h1 class="mb-3">Add Sales Transaction</h1>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="transactionReactiveForm" (ngSubmit)="AddSalesTransaction()">
+          <div class="mb-3">
+            <label for="customerId" class="form-label">Customer</label>
+            <select class="form-select" id="customerId" formControlName="customerId">
+              <option [ngValue]="null">-- Select Customer --</option>
+              <option *ngFor="let customer of customer" [value]="customer.customerId">
+                {{ customer.fullName }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="transactionReactiveForm.get('customerId').invalid && (transactionReactiveForm.get('customerId').dirty || transactionReactiveForm.get('customerId').touched)"
+          >
+            <div *ngIf="transactionReactiveForm.get('customerId').errors?.['required']">
+              Customer is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="productId" class="form-label">Product</label>
+            <select class="form-select" id="productId" formControlName="productId">
+              <option [ngValue]="null">-- Select Product --</option>
+              <option *ngFor="let product of product" [value]="product.productId">
+                {{ product.productName }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="transactionReactiveForm.get('productId').invalid && (transactionReactiveForm.get('productId').dirty || transactionReactiveForm.get('productId').touched)"
+          >
+            <div *ngIf="transactionReactiveForm.get('productId').errors?.['required']">
+              Product is required.
+            </div>
+          </div>
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input type="text" class="form-control" id="quantity" formControlName="quantity" [ngClass]="{
+            'is-invalid':
+            transactionReactiveForm.controls['quantity'].invalid &&
+            (transactionReactiveForm.controls['quantity'].dirty ||
+            transactionReactiveForm.controls['quantity'].touched)
+          }"
+        />
+          <div
+            class="invalid-feedback"
+            *ngIf="transactionReactiveForm.get('quantity').invalid && (transactionReactiveForm.get('quantity').dirty || transactionReactiveForm.get('quantity').touched)"
+          >
+            <div *ngIf="transactionReactiveForm.controls['quantity']?.errors?.['required']">
+              Quantity is required.
+            </div>
+            <div *ngIf="transactionReactiveForm.controls['quantity']?.errors?.['min']">
+              Must be greater than 0.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="transactionDate" class="form-label">Transaction Date</label>
+          <input type="date" class="form-control" id="transactionDate" formControlName="transactionDate"
+            [ngClass]="{
+              'is-invalid':
+              transactionReactiveForm.controls['transactionDate'].invalid &&
+              (transactionReactiveForm.controls['transactionDate'].dirty ||
+                transactionReactiveForm.controls['transactionDate'].touched)
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="transactionReactiveForm.get('transactionDate').invalid && (transactionReactiveForm.get('transactionDate').dirty || transactionReactiveForm.get('transactionDate').touched)"
+          >
+            <div *ngIf="transactionReactiveForm.controls['transactionDate']?.errors?.['required']">
+              Transaction Date is required.
+            </div>
+            <div *ngIf="transactionReactiveForm.controls['transactionDate']?.errors?.['pattern']">
+              Should be in the pattern: yy-mm-dd
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!transactionReactiveForm.valid">Add Transaction</button>
+      </form>
+    </div>
+  </div>
+</div>
+

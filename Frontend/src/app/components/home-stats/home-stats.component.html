@@ -1,0 +1,172 @@
+<br>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-3">
+    <div class="card center">
+      <div class="card-header" style="background-color: #B9E8B4;">
+        <h3 class="card-title">Highest Selling Product</h3>
+      </div>
+      <div class="card-body inner-body-text">
+        <div *ngIf="highestProductDetails">
+          <table>
+            <tr>
+              <td>Product ID:</td>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">{{ highestProductDetails.productId }}</td>
+            </tr>
+            <tr>
+              <td>Product Name:</td>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">{{ highestProductDetails.productName }}</td>
+            </tr>
+            <tr>
+              <td>Price:</td>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">{{ highestProductDetails.price }}</td>
+            </tr>
+            <tr>
+              <td>Remaining Quantity:</td>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">{{ highestProductDetails.remainingQuantity }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><a [routerLink]="['/edit/product', highestProductDetails.productId]" class="button-3"><i class="bi bi-eye"></i> View</a></td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="!highestProductDetails">
+          <p>No highest sales product found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="col-3">
+      <div class="card center">
+        <div class="card-header" style="background-color: #F97A7A;">
+          <h3 class="card-title">Lowest Selling Product</h3>
+        </div>
+        <div class="card-body inner-body-text">
+          <div *ngIf="lowestProductDetails">
+            <table>
+              <tr>
+                <td>Product ID:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestProductDetails.productId }}</td>
+              </tr>
+              <tr>
+                <td>Product Name:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestProductDetails.productName }}</td>
+              </tr>
+              <tr>
+                <td>Price:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestProductDetails.price }}</td>
+              </tr>
+              <tr>
+                <td>Remaining Quantity:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestProductDetails.remainingQuantity }}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><a [routerLink]="['/edit/product', lowestProductDetails.productId]" class="button-3"><i class="bi bi-eye"></i> View</a></td>
+              </tr>
+            </table>
+          </div>
+          <div *ngIf="!lowestProductDetails">
+            <p>No lowest sales product found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="card center">
+        <div class="card-header" style="background-color: #F5F99D;">
+          <h3 class="card-title">Running Out Soon</h3>
+        </div>
+        <div class="card-body">
+          <div *ngIf="lowestQuantityProductDetails" class="inner-body">
+            <table>
+              <tr>
+                <td>Product ID:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestQuantityProductDetails.productId }}</td>
+              </tr>
+              <tr>
+                <td>Product Name:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestQuantityProductDetails.productName }}</td>
+              </tr>
+              <tr>
+                <td>Price:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestQuantityProductDetails.price }}</td>
+              </tr>
+              <tr>
+                <td>Remaining Quantity:</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">{{ lowestQuantityProductDetails.remainingQuantity }}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><a [routerLink]="['/edit/product', lowestQuantityProductDetails.productId]" class="button-3"><i class="bi bi-eye"></i> View</a></td>
+              </tr>
+            </table>
+          </div>
+          <div *ngIf="!lowestQuantityProductDetails">
+            <p>No highest sales product found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<br>
+
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header" style="background-color: #DADCFF;">
+        <h3 class="card-title" style="text-align: center;">Latest Transactions</h3>
+      </div>
+      <div class="card-body" style="width: 100%;">
+        <table class="custom-table center">
+            <thead>
+              <tr>
+                <th style="width: 150px;">Transaction ID</th>
+                <th style="width: 150px;">Customer ID</th>
+                <th style="width: 150px;">Product ID</th>
+                <th style="width: 150px;">Quantity</th>
+                <th style="width: 200px;">Transaction Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of transactionDetails">
+                <td>{{ transaction.transactionId }}</td>
+                <td>{{ transaction.customerId }}</td>
+                <td>{{ transaction.productId }}</td>
+                <td>{{ transaction.quantity }}</td>
+                <td>{{ transaction.transactionDate }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+

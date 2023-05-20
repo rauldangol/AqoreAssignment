@@ -33,13 +33,6 @@ BEGIN
     SELECT * FROM Category
 END
 
-create procedure GetAllEmployees
-As
-Begin
-Select * from employeesList
-
-End
-select * from Category
 
 /* GET CATEGORY By Id*/
 
